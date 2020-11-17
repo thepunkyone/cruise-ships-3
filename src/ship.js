@@ -1,9 +1,13 @@
-function Ship(name, startingPort) {
+function Ship(currentPort) {
 
-    this.name = name;
-    this.startingPort = startingPort;
+    this.currentPort = currentPort;
     this.passengers = 0;
-    
+
+    };
+
+    Ship.prototype.startJourney = function () {
+     this.currentPort = null;
+
     };
 
 
