@@ -1,14 +1,22 @@
-function Ship(currentPort) {
+function Ship(departingPort) {
 
-    this.currentPort = currentPort;
+    this.departingPort = departingPort;
+    this.dockingPort = null;
     this.passengers = 0;
 
     };
 
-    Ship.prototype.startJourney = function () {
-     this.currentPort = null;
+    Ship.prototype.sail = function () {
+     this.departingPort = null;
+     this.dockingPort = null;
 
     };
+
+    Ship.prototype.dock = function (dockingPort) {
+     this.dockingPort = dockingPort;
+
+    };
+
 
 
 

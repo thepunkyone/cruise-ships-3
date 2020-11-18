@@ -10,18 +10,28 @@ describe('Ship', () => {
       expect (ship.passengers).toEqual(0);
 });
 
-it('returns starting port', () => {
+it('returns departing port', () => {
     const ship = new Ship('Belfast');
-    expect (ship.currentPort).toEqual('Belfast');
+    expect (ship.departingPort).toEqual('Belfast');
 });
 });
 
-describe('startJourney', () => {
-    it('can start journey', () => {
+describe('sail', () => {
+    it('can set sail', () => {
         const ship = new Ship('Belfast');
 
-        ship.startJourney();
-        expect(ship.currentPort).toBeFalsy();
+        ship.sail();
+        expect(ship.departingPort).toBeFalsy();
+        expect(ship.dockingPort).toBeFalsy();
+    });
+});
+
+describe('dock', () => {
+    it('can dock at a port', () => {
+        const ship = new Ship();
+
+        ship.dock('Liverpool');
+        expect(ship.dockingPort).toBe('Liverpool');
     });
 });
 
