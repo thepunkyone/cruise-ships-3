@@ -1,18 +1,23 @@
 const Ship = require('../src/ship');
+const Port = require('../src/port');
+const Itinerary = require('../src/itinerary');
+
+
 
 describe('Ship', () => {
     it('returns an object', () => {
       expect(new Ship('Belfast')).toBeInstanceOf(Object);    
   });
 
-  it('returns 0 passengers', () => {
-      const ship = new Ship('Belfast');
-      expect (ship.passengers).toEqual(0);
-});
 
-it('returns departing port', () => {
+it('returns current port', () => {
+
     const ship = new Ship('Belfast');
-    expect (ship.departingPort).toEqual('Belfast');
+    const port = new Port('Belfast');
+    const ship = new Ship(port);
+
+    expect(ship.currentPort).toBe('Belfast');
+    expect(ship.currentPort).toBe(port);
 });
 });
 
@@ -21,8 +26,7 @@ describe('sail', () => {
         const ship = new Ship('Belfast');
 
         ship.sail();
-        expect(ship.departingPort).toBeFalsy();
-        expect(ship.dockingPort).toBeFalsy();
+        expect(ship.currrentPort).toBeFalsy();
     });
 });
 
@@ -34,4 +38,3 @@ describe('dock', () => {
         expect(ship.dockingPort).toBe('Liverpool');
     });
 });
-

@@ -1,8 +1,8 @@
-function Ship(departingPort) {
+function Ship(currentPort) {
 
-    this.departingPort = departingPort;
+    this.currentPort = currentPort;
+    this.previousPort = null;
     this.dockingPort = null;
-    this.passengers = 0;
 
     };
 
