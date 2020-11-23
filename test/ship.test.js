@@ -31,7 +31,7 @@ it('has a starting port', () => {
     expect(ship.currentPort).toBe(port);
   });
 
-  it('can\'t sail further than its itinerary', () => {
+  it('cant sail further than its itinerary', () => {
     const belfast = new Port('Belfast');
     const liverpool = new Port('Liverpool');
     const itinerary = new Itinerary([belfast, liverpool]);
@@ -41,6 +41,14 @@ it('has a starting port', () => {
     ship.dock();
   
     expect(() => ship.sail()).toThrowError('End of itinerary reached');
+  });
+
+  it('gets added to port on instantiation', () => {
+    const dover = new Port('Dover');
+    const itinerary = new Itinerary([dover]);
+    const ship = new Ship(itinerary);
+  
+    expect(dover.ships).toContain(ship);
   });
 });
 
@@ -54,6 +62,7 @@ describe('sail', () => {
             ship.sail();
           
             expect(ship.currentPort).toBeFalsy();
+            expect(belfast.ships).not.toContain(ship);
           });
 });
 
@@ -68,5 +77,6 @@ describe('dock', () => {
         ship.dock();
       
         expect(ship.currentPort).toBe(calais);
+        expect(calais.ships).toContain(ship);
       });
 });
