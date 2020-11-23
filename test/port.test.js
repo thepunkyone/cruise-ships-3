@@ -6,7 +6,7 @@ describe('Port', () => {
       expect(new Port('Liverpool')).toBeInstanceOf(Object);    
   });
 
-  it('returns an object', () => {
+  it('contains a port property', () => {
     const port = new Port('Liverpool');
     expect (port.name).toEqual('Liverpool');   
 });
