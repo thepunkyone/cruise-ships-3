@@ -21,7 +21,7 @@ describe("something", () => {
   describe("addShip", () => {
     it("can add a ship", () => {
       ship = jest.fn;
-      port.addShip(ship); 
+      port.addShip(ship);
       expect(port.ships).toContain(ship);
     });
   });

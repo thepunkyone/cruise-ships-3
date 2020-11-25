@@ -1,11 +1,5 @@
-function Itinerary(ports) {
+function Itinerary(belfast, liverpool) {
+  this.ports = [belfast, liverpool];
+}
 
-    this.ports = ports;
-
-    };
-
-
-
-
-
-    module.exports = Itinerary;
+module.exports = Itinerary;

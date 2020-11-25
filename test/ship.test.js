@@ -7,11 +7,30 @@ describe("with ports and an itinerary", () => {
   let belfast;
   let liverpool;
   let itinerary;
+  let port;
 
   beforeEach(() => {
-    belfast = new Port("Belfast");
-    liverpool = new Port("Liverpool");
-    itinerary = new Itinerary([belfast, liverpool]);
+    port = {
+      removeShip: jest.fn(),
+      addShip: jest.fn(),
+    };
+
+    belfast = {
+      ...port,
+      name: "Belfast",
+      ships: [],
+    };
+
+    liverpool = {
+      ...port,
+      name: "Liverpool",
+      ships: [],
+    };
+
+    itinerary = {
+      ports: [belfast, liverpool],
+    };
+
     ship = new Ship(itinerary);
   });
 
@@ -32,7 +51,11 @@ describe("with ports and an itinerary", () => {
     });
 
     it("gets added to port on instantiation", () => {
-      expect(belfast.ships).toContain(ship);
+      expect(port.addShip).toHaveBeenCalledWith(ship);
+    });
+
+    it("has a starting port", () => {
+      expect(ship.currentPort).toBe(belfast);
     });
   });
 
@@ -41,7 +64,7 @@ describe("with ports and an itinerary", () => {
       ship.sail();
 
       expect(ship.currentPort).toBeFalsy();
-      expect(belfast.ships).not.toContain(ship);
+      expect(liverpool.removeShip).toHaveBeenCalledWith(ship);
     });
   });
 
@@ -51,7 +74,7 @@ describe("with ports and an itinerary", () => {
       ship.dock();
 
       expect(ship.currentPort).toBe(liverpool);
-      expect(liverpool.ships).toContain(ship);
+      expect(liverpool.addShip).toHaveBeenCalledWith(ship);
     });
   });
 });
