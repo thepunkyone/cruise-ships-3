@@ -1,37 +1,37 @@
-const Port = require('../src/port');
+const Port = require("../src/port");
 
-describe('Port', () => {
-    it('returns an object', () => {
-        
-      expect(new Port('Liverpool')).toBeInstanceOf(Object);    
+describe("something", () => {
+  let port;
+  let ship;
+
+  beforeEach(() => {
+    port = new Port("Belfast");
+    ship = {};
   });
 
-  it('contains a port property', () => {
-    const port = new Port('Liverpool');
-    expect (port.name).toEqual('Liverpool');   
-});
-});
+  describe("Port", () => {
+    it("returns an object", () => {
+      expect(new Port("Liverpool")).toBeInstanceOf(Object);
+    });
 
+    it("contains a port property", () => {
+      expect(port.name).toEqual("Belfast");
+    });
+  });
 
-describe('addShip', () => {
-it('can add a ship', () => {
-  const port = new Port('Belfast');
-  const ship = {};
+  describe("addShip", () => {
+    it("can add a ship", () => {
+      port.addShip(ship);
 
-  port.addShip(ship);
+      expect(port.ships).toContain(ship);
+    });
+  });
 
-  expect(port.ships).toContain(ship);
-});
+  describe("removeShip", () => {
+    it("can remove a ship", () => {
+      port.removeShip(ship);
 
-});
-
-describe('removeShip', () => {
-  it('can remove a ship', () => {
-    const port = new Port('Belfast');
-    const ship = {};
-  
-    port.removeShip(ship);
-  
-    expect(port.ships).toEqual([]);
+      expect(port.ships).toEqual([]);
+    });
   });
 });
