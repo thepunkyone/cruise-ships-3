@@ -1,14 +1,18 @@
-const Itinerary = require('../src/itinerary');
+const Itinerary = require("../src/itinerary");
 
-describe('Itinerary', () => {
-    it('returns an object', () => {
-      expect(new Itinerary()).toBeInstanceOf(Object);    
-  });  
+let belfast;
+let liverpool;
+let itinerary;
 
-it('contains a ports property', () => {
-    const itinerary = new Itinerary('New York');
+describe("Itinerary", () => {
+  it("returns an object", () => {
+    expect(new Itinerary()).toBeInstanceOf(Object);
+  });
 
-    expect(itinerary).toHaveProperty('ports');
-})
-
+  it("contains a ports property", () => {
+    belfast = jest.fn();
+    liverpool = jest.fn();
+    itinerary = new Itinerary("belfast");
+    expect(itinerary).toHaveProperty("ports");
+  });
 });

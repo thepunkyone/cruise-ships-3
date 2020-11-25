@@ -6,7 +6,6 @@ describe("something", () => {
 
   beforeEach(() => {
     port = new Port("Belfast");
-    ship = {};
   });
 
   describe("Port", () => {
@@ -21,16 +20,16 @@ describe("something", () => {
 
   describe("addShip", () => {
     it("can add a ship", () => {
-      port.addShip(ship);
-
+      ship = jest.fn;
+      port.addShip(ship); 
       expect(port.ships).toContain(ship);
     });
   });
 
   describe("removeShip", () => {
     it("can remove a ship", () => {
+      ship = jest.fn;
       port.removeShip(ship);
-
       expect(port.ships).toEqual([]);
     });
   });
