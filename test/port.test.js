@@ -10,10 +10,10 @@ describe("something", () => {
 
   describe("Port", () => {
     it("returns an object", () => {
-      expect(new Port("Liverpool")).toBeInstanceOf(Object);
+      expect(port).toBeInstanceOf(Object); // can reuse the port set up in beforeEach
     });
 
-    it("contains a port property", () => {
+    it("has the correct name", () => { // asserting on the name value here, so the test title should match
       expect(port.name).toEqual("Belfast");
     });
   });

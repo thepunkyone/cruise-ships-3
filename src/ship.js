@@ -5,7 +5,7 @@ function Ship(itinerary) {
   this.currentPort.addShip(this);
 }
 
-(Ship.prototype.sail = function () {
+Ship.prototype.sail = function () { // unnecessary wrapping in () here
   const itinerary = this.itinerary;
   const currentPortIndex = itinerary.ports.indexOf(this.currentPort);
 
@@ -16,14 +16,15 @@ function Ship(itinerary) {
   this.previousPort = this.currentPort;
   this.currentPort = null;
   this.previousPort.removeShip(this);
-}),
-  (Ship.prototype.dock = function () {
-    const itinerary = this.itinerary;
-    const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
+};
 
-    this.currentPort = itinerary.ports[previousPortIndex + 1];
+Ship.prototype.dock = function () {
+  const itinerary = this.itinerary;
+  const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
 
-    this.currentPort.addShip(this);
-  });
+  this.currentPort = itinerary.ports[previousPortIndex + 1];
+
+  this.currentPort.addShip(this);
+};
 
 module.exports = Ship;

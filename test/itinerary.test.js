@@ -1,18 +1,23 @@
 const Itinerary = require("../src/itinerary");
 
-let belfast;
-let liverpool;
-let itinerary;
-
 describe("Itinerary", () => {
+  const belfast = jest.fn();
+  const liverpool = jest.fn();
+  let itinerary;
+
+  beforeEach(() => {
+    itinerary = new Itinerary([belfast, liverpool]) // use beforeEach to create an itinerary for every test in one place
+  })
+
   it("returns an object", () => {
-    expect(new Itinerary()).toBeInstanceOf(Object);
+    expect(itinerary).toBeInstanceOf(Object);
   });
 
   it("contains a ports property", () => {
-    belfast = jest.fn();
-    liverpool = jest.fn();
-    itinerary = new Itinerary("belfast");
     expect(itinerary).toHaveProperty("ports");
+  });
+
+  it("has ports", () => { // check that the Itinerary contains the ports that it was created with
+    expect(itinerary.ports).toEqual([belfast, liverpool]);
   });
 });

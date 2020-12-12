@@ -1,28 +1,22 @@
 const Ship = require("../src/ship");
-const Port = require("../src/port");
-const Itinerary = require("../src/itinerary");
 
 describe("with ports and an itinerary", () => {
   let ship;
   let belfast;
   let liverpool;
   let itinerary;
-  let port;
 
   beforeEach(() => {
-    port = {
-      removeShip: jest.fn(),
-      addShip: jest.fn(),
-    };
-
     belfast = {
-      ...port,
-      name: "Belfast",
+      removeShip: jest.fn(), // the removeShip and addShip methods here can't be shared between the ports because
+      addShip: jest.fn(), // when you assert that liverpool.addShip() was called it will give you a false positive
+      name: "Belfast", // because belfast.addShip() was called when the ship got instantiated
       ships: [],
     };
 
     liverpool = {
-      ...port,
+      removeShip: jest.fn(),
+      addShip: jest.fn(),
       name: "Liverpool",
       ships: [],
     };
@@ -51,7 +45,7 @@ describe("with ports and an itinerary", () => {
     });
 
     it("gets added to port on instantiation", () => {
-      expect(port.addShip).toHaveBeenCalledWith(ship);
+      expect(belfast.addShip).toHaveBeenCalledWith(ship);
     });
 
     it("has a starting port", () => {
@@ -64,9 +58,9 @@ describe("with ports and an itinerary", () => {
       ship.sail();
 
       expect(ship.currentPort).toBeFalsy();
-      expect(liverpool.removeShip).toHaveBeenCalledWith(ship);
-    });
-  });
+      expect(belfast.removeShip).toHaveBeenCalledWith(ship); // ship sets sail from the first port in the ports array, so this is belfast
+    });                                                      // liverpool was only passing because the removeShip function was shared
+  });                                                         // between the two
 
   describe("dock", () => {
     it("can dock at a different port", () => {
